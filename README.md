@@ -1,4 +1,6 @@
-# Project Setup
+# DATa Management System - Admin Panel
+
+A comprehensive admin panel for managing data, providers, categories, bundles, transactions, and users in the Data Management System.
 
 ## Clone the Repository
 

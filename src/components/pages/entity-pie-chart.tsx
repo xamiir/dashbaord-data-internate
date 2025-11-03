@@ -11,20 +11,18 @@ import { useStores } from "@/models/helpers";
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 
-const COLORS = ["#3b82f6", "#10b981", "#ef4444", "#8b5cf6"];
+const COLORS = ["#3b82f6", "#10b981", "#8b5cf6"];
 
 export const EntityPieChart = observer(function EntityPieChart() {
   const {
     usersStore: { getUsers, users },
     driversStore: { getDrivers, drivers },
-    motorcyclesStore: { getMotorcycles, motorcycles },
     ownersStore: { getOwners, owners },
   } = useStores();
 
   useEffect(() => {
     getUsers({ page: 1, limit: 1000 });
     getDrivers({ page: 1, limit: 1000 });
-    getMotorcycles({ page: 1, limit: 1000 });
     getOwners({ page: 1, limit: 1000 });
   }, []);
 
@@ -36,10 +34,6 @@ export const EntityPieChart = observer(function EntityPieChart() {
     {
       name: "Drivers",
       value: drivers.data?.length || 0,
-    },
-    {
-      name: "Motorcycles",
-      value: motorcycles.data?.length || 0,
     },
     {
       name: "Owners",

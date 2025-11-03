@@ -18,6 +18,10 @@ import {
   CreditCard,
   ChevronLeft,
   ChevronRight,
+  Package,
+  Tag,
+  Receipt,
+  Router,
 } from "lucide-react";
 import { PATHS } from "@/routers/paths";
 import { Button } from "@/components/ui/button";
@@ -44,14 +48,16 @@ const mapIcons = (icon: string) => {
       return <LayoutDashboardIcon className="mr-3 h-5 w-5" />;
     case "users":
       return <Users2 className="mr-3 h-5 w-5" />;
-    case "shield":
-      return <CreditCard className="mr-3 h-5 w-5" />;
-    case "countries":
-      return <MapIcon className="mr-3 h-5 w-5" />;
-    case "settings":
-      return <Bike className="mr-3 h-5 w-5" />;
-    case "drivers":
-      return <UserCheck className="mr-3 h-5 w-5" />;
+    case "providers":
+      return <Shield className="mr-3 h-5 w-5" />;
+    case "categories":
+      return <Tag className="mr-3 h-5 w-5" />;
+    case "bundles":
+      return <Package className="mr-3 h-5 w-5" />;
+    case "transactions":
+      return <Receipt className="mr-3 h-5 w-5" />;
+    case "gateways":
+      return <Router className="mr-3 h-5 w-5" />;
     default:
       return <LayoutDashboardIcon className="mr-3 h-5 w-5" />;
   }
@@ -80,13 +86,27 @@ export const Sidebar = observer(function Sidebar() {
 
   const menuItems = [
     { path: PATHS.Overview.app, icon: "dashboard", subject: "Dashboard" },
-    { path: PATHS.Overview.users.root, icon: "users", subject: "Users" },
-    { path: PATHS.Overview.owners.root, icon: "users", subject: "Owners" },
-    { path: PATHS.Overview.drivers.root, icon: "drivers", subject: "Drivers" },
+    // { path: PATHS.Overview.users.root, icon: "users", subject: "Users" },
     {
-      path: PATHS.Overview.motorcycles.root,
-      icon: "settings",
-      subject: "Motorcycles",
+      path: PATHS.Overview.providers.root,
+      icon: "providers",
+      subject: "Provider",
+    },
+    {
+      path: PATHS.Overview.categories.root,
+      icon: "categories",
+      subject: "Category",
+    },
+    { path: PATHS.Overview.bundles.root, icon: "bundles", subject: "Bundles" },
+    {
+      path: PATHS.Overview.transactions.root,
+      icon: "transactions",
+      subject: "Transaction",
+    },
+    {
+      path: PATHS.Overview.gateways.root,
+      icon: "gateways",
+      subject: "Gateways",
     },
   ];
 
@@ -116,7 +136,7 @@ export const Sidebar = observer(function Sidebar() {
               {!sidebarCollapsed && (
                 <div className="hidden md:block">
                   <h2 className="text-lg md:text-xl font-bold text-gray-900 dark:text-gray-100">
-                    Motorcycle
+                    Buy Data
                   </h2>
                   <p className="text-xs md:text-sm text-gray-500 dark:text-gray-400">
                     Management System
@@ -184,10 +204,10 @@ export const Sidebar = observer(function Sidebar() {
             {!sidebarCollapsed && (
               <>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                  Motorcycle v1.0.0
+                  Buy Data v1.0.0
                 </p>
                 <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
-                  © 2024 All rights reserved
+                  © 2025 All rights reserved
                 </p>
               </>
             )}

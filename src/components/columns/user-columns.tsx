@@ -30,9 +30,9 @@ export const userColumns: ColumnDef<IUser>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "id",
+    accessorKey: "_id",
     header: "ID",
-    cell: ({ row }) => <div className="capitalize">{row.getValue("id")}</div>,
+    cell: ({ row }) => <div className="capitalize">{row.getValue("_id")}</div>,
   },
   {
     accessorKey: "name",
@@ -40,34 +40,29 @@ export const userColumns: ColumnDef<IUser>[] = [
     cell: ({ row }) => <div className="capitalize">{row.getValue("name")}</div>,
   },
   {
-    accessorKey: "phone",
-    header: "Phone",
-    cell: ({ row }) => row.getValue("phone"),
-  },
-  {
     accessorKey: "email",
     header: "Email",
-    cell: ({ row }) => row.getValue("email"),
+    cell: ({ row }) => (
+      <div className="text-blue-600">{row.getValue("email")}</div>
+    ),
   },
   {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => {
-      const status = row.getValue("status") as string;
-      return <Badge className="capitalize">{status || "active"}</Badge>;
-    },
+    accessorKey: "balance",
+    header: "Balance",
+    cell: ({ row }) => (
+      <div className="font-medium text-green-600">
+        ${row.getValue("balance")}
+      </div>
+    ),
   },
   {
-    accessorKey: "is_email_verified",
-    header: "Email Verified",
-    cell: ({ row }) => {
-      const isVerified = row.getValue("is_email_verified");
-      return (
-        <Badge className={isVerified ? "bg-green-500" : "bg-red-500"}>
-          {isVerified ? "Yes" : "No"}
-        </Badge>
-      );
-    },
+    accessorKey: "apiKey",
+    header: "API Key",
+    cell: ({ row }) => (
+      <div className="font-mono text-sm bg-gray-100 px-2 py-1 rounded">
+        {String(row.getValue("apiKey")).substring(0, 20)}...
+      </div>
+    ),
   },
   {
     id: "actions",
@@ -79,14 +74,14 @@ export const userColumns: ColumnDef<IUser>[] = [
         <div className="gap-2 flex items-center">
           <EditButton
             size={"xs"}
-            to={PATHS.Overview.users.view(user.id.toString())}
+            to={PATHS.Overview.users.view(user._id.toString())}
             variant={"default"}
           >
             <span>View</span>
           </EditButton>
           <EditButton
             size={"xs"}
-            to={PATHS.Overview.users.edit(user.id.toString())}
+            to={PATHS.Overview.users.edit(user._id.toString())}
             variant={"outline"}
           >
             <EditIcon className="mr-2 h-3 w-3" />

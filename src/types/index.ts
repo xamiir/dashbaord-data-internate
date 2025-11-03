@@ -24,3 +24,10 @@ export interface OperationState {
 export * from "./owner";
 export * from "./driver";
 export * from "./factory";
+export * from "./category";
+export * from "./provider";
+export * from "./bundle";
+export * from "./transaction";
+export * from "./user";
+export * from "./country";
+export * from "./gateway";

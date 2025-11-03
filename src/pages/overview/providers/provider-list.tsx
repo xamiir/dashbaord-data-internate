@@ -1,24 +1,25 @@
+import { providerColumns } from "@/components/columns/provider-columns";
 import { CardDescription, CardTitle } from "@/components/ui/card";
 import { Breadcrumb, DataTable } from "@/components/widgets";
 import { PATHS } from "@/routers/paths";
-import { LayoutDashboard, BikeIcon } from "lucide-react";
+import { LayoutDashboard, Shield, PlusIcon } from "lucide-react";
 import { useEffect } from "react";
 import useIsMountedRef from "@/hooks/use-is-mounted";
 import { useStores } from "@/models/helpers";
 import { Config } from "@/config";
 import { observer } from "mobx-react-lite";
-import { motorcycleColumns } from "@/components/columns/motorcycle-columns";
+import { CreateButton } from "@/components/authorized-buttons";
 
-export const MotorcycleList = observer(function MotorcycleList() {
+export const ProviderList = observer(function ProviderList() {
   const {
-    motorcyclesStore: { getMotorcycles, motorcycles },
+    providersStore: { getProviders, providers },
   } = useStores();
 
   const isMounted = useIsMountedRef();
 
   useEffect(() => {
     if (isMounted.current) {
-      getMotorcycles({
+      getProviders({
         page: Config.DEFAULT_PAGE,
         limit: Config.DEFAULT_PAGE_LIMIT,
       });
@@ -35,9 +36,9 @@ export const MotorcycleList = observer(function MotorcycleList() {
             icon: <LayoutDashboard className="h-4 w-4" />,
           },
           {
-            label: "Motorcycles",
+            label: "Providers",
             disabled: true,
-            icon: <BikeIcon className="h-4 w-4" />,
+            icon: <Shield className="h-4 w-4" />,
           },
         ]}
       />
@@ -45,19 +46,28 @@ export const MotorcycleList = observer(function MotorcycleList() {
       <div className="my-8">
         <div className="flex justify-between">
           <div>
-            <CardTitle>Motorcycles</CardTitle>
+            <CardTitle>Providers</CardTitle>
             <CardDescription>
-              Manage motorcycles in your application
+              Manage providers in your application
             </CardDescription>
+          </div>
+          <div>
+            <CreateButton
+              to={PATHS.Overview.providers.new}
+              className="flex items-center space-x-2"
+            >
+              <PlusIcon className="h-4 w-4" />
+              <span>Add New Provider</span>
+            </CreateButton>
           </div>
         </div>
         <div className="mt-4">
           <DataTable
-            data={motorcycles.data || []}
-            columns={motorcycleColumns}
+            data={providers.data || []}
+            columns={providerColumns}
             onPageChange={() => {}}
-            currentPage={1}
-            totalPages={1}
+            currentPage={providers.current_page}
+            totalPages={providers.total_pages}
           />
         </div>
       </div>

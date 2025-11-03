@@ -15,14 +15,12 @@ export const EntityBarChart = observer(function EntityBarChart() {
   const {
     usersStore: { getUsers, users },
     driversStore: { getDrivers, drivers },
-    motorcyclesStore: { getMotorcycles, motorcycles },
     ownersStore: { getOwners, owners },
   } = useStores();
 
   useEffect(() => {
     getUsers({ page: 1, limit: 1000 });
     getDrivers({ page: 1, limit: 1000 });
-    getMotorcycles({ page: 1, limit: 1000 });
     getOwners({ page: 1, limit: 1000 });
   }, []);
 
@@ -36,11 +34,6 @@ export const EntityBarChart = observer(function EntityBarChart() {
       name: "Drivers",
       count: drivers.data?.length || 0,
       fill: "#10b981",
-    },
-    {
-      name: "Motorcycles",
-      count: motorcycles.data?.length || 0,
-      fill: "#ef4444",
     },
     {
       name: "Owners",

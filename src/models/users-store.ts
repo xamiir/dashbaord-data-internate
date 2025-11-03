@@ -20,8 +20,8 @@ export const UsersStoreModel = types
       try {
         store.setStatus("pending");
         const response = await api.get<GenericResponse<IUser[]>>(
-          "",
-          `/user/?page=${page}&limit=${limit}`
+          "http://localhost:3001",
+          `/v1/api/users/?page=${page}&limit=${limit}`
         );
         store.setProp("users", response);
         store.setStatus("done");
@@ -36,8 +36,8 @@ export const UsersStoreModel = types
       try {
         store.setStatus("pending");
         const response = await api.post<GenericResponse<IUser>>(
-          "",
-          "/user/register/",
+          "http://localhost:3001",
+          "/v1/api/register/",
           data
         );
         store.setStatus("done");
@@ -52,8 +52,8 @@ export const UsersStoreModel = types
       try {
         store.setStatus("pending");
         const response = await api.put<GenericResponse<IUser>>(
-          "",
-          `/user/${id}/update`,
+          "http://localhost:3001",
+          `/v1/api/users/${id}`,
           data
         );
         store.setStatus("done");

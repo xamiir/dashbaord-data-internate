@@ -61,100 +61,131 @@ const routesConfig: RouteType[] = [
   },
 
   {
-    path: PATHS.Overview.owners.root,
+    path: PATHS.Overview.providers.root,
     element: lazy(() =>
-      import("../pages/overview/owners/owner-list").then((module) => ({
-        default: module.OwnerList,
+      import("../pages/overview/providers/provider-list").then((module) => ({
+        default: module.ProviderList,
       }))
     ),
   },
   {
-    path: PATHS.Overview.owners.new,
+    path: PATHS.Overview.providers.new,
     element: lazy(() =>
-      import("../pages/overview/owners/").then((module) => ({
-        default: module.NewEditOwner,
-      }))
-    ),
-  },
-
-  {
-    path: PATHS.Overview.owners.root + "/:id/edit",
-    element: lazy(() =>
-      import("../pages/overview/owners").then((module) => ({
-        default: module.NewEditOwner,
-      }))
-    ),
-  },
-  {
-    path: PATHS.Overview.owners.root + "/:id",
-    element: lazy(() =>
-      import("../pages/overview/owners/owner-view").then((module) => ({
-        default: module.OwnerView,
-      }))
-    ),
-  },
-
-  {
-    path: PATHS.Overview.drivers.root,
-    element: lazy(() =>
-      import("../pages/overview/drivers").then((module) => ({
-        default: module.DriverList,
-      }))
-    ),
-  },
-  {
-    path: PATHS.Overview.drivers.new,
-    element: lazy(() =>
-      import("../pages/overview/drivers/new-edit-driver").then((module) => ({
-        default: module.NewEditDriver,
-      }))
-    ),
-  },
-
-  {
-    path: PATHS.Overview.drivers.root + "/:id/edit",
-    element: lazy(() =>
-      import("../pages/overview/drivers/new-edit-driver").then((module) => ({
-        default: module.NewEditDriver,
-      }))
-    ),
-  },
-  {
-    path: PATHS.Overview.drivers.root + "/:id",
-    element: lazy(() =>
-      import("../pages/overview/drivers/driver-view").then((module) => ({
-        default: module.DriverView,
-      }))
-    ),
-  },
-
-  {
-    path: PATHS.Overview.motorcycles.root,
-    element: lazy(() =>
-      import("../pages/overview/motorcycles/motorcycle-list").then(
+      import("../pages/overview/providers/new-edit-provider").then(
         (module) => ({
-          default: module.MotorcycleList,
+          default: module.NewEditProvider,
+        })
+      )
+    ),
+  },
+  {
+    path: PATHS.Overview.providers.root + "/:id/edit",
+    element: lazy(() =>
+      import("../pages/overview/providers/new-edit-provider").then(
+        (module) => ({
+          default: module.NewEditProvider,
         })
       )
     ),
   },
 
   {
-    path: PATHS.Overview.motorcycles.root + "/:id/edit",
+    path: PATHS.Overview.categories.root,
     element: lazy(() =>
-      import("../pages/overview/motorcycles").then((module) => ({
-        default: module.EditMotorcycle,
+      import("../pages/overview/categories/category-list").then((module) => ({
+        default: module.CategoryList,
       }))
     ),
   },
   {
-    path: PATHS.Overview.motorcycles.root + "/:id",
+    path: PATHS.Overview.categories.new,
     element: lazy(() =>
-      import("../pages/overview/motorcycles/motorcycle-view").then(
+      import("../pages/overview/categories/new-edit-category").then(
         (module) => ({
-          default: module.MotorcycleView,
+          default: module.NewEditCategory,
         })
       )
+    ),
+  },
+  {
+    path: PATHS.Overview.categories.root + "/:id/edit",
+    element: lazy(() =>
+      import("../pages/overview/categories/new-edit-category").then(
+        (module) => ({
+          default: module.NewEditCategory,
+        })
+      )
+    ),
+  },
+  {
+    path: PATHS.Overview.categories.root + "/:id",
+    element: lazy(() =>
+      import("../pages/overview/categories/category-view").then((module) => ({
+        default: module.CategoryView,
+      }))
+    ),
+  },
+
+  {
+    path: PATHS.Overview.bundles.root,
+    element: lazy(() =>
+      import("../pages/overview/bundles/bundle-list").then((module) => ({
+        default: module.BundleList,
+      }))
+    ),
+  },
+  {
+    path: PATHS.Overview.bundles.new,
+    element: lazy(() =>
+      import("../pages/overview/bundles/new-edit-bundle").then((module) => ({
+        default: module.NewEditBundle,
+      }))
+    ),
+  },
+  {
+    path: PATHS.Overview.bundles.root + "/:id/edit",
+    element: lazy(() =>
+      import("../pages/overview/bundles/new-edit-bundle").then((module) => ({
+        default: module.NewEditBundle,
+      }))
+    ),
+  },
+  {
+    path: PATHS.Overview.bundles.root + "/:id",
+    element: lazy(() =>
+      import("../pages/overview/bundles/bundle-view").then((module) => ({
+        default: module.BundleView,
+      }))
+    ),
+  },
+
+  {
+    path: PATHS.Overview.transactions.root,
+    element: lazy(() =>
+      import("../pages/overview/transactions/transaction-list").then(
+        (module) => ({
+          default: module.TransactionList,
+        })
+      )
+    ),
+  },
+  {
+    path: PATHS.Overview.transactions.root + "/:id",
+    element: lazy(() =>
+      import("../pages/overview/transactions/transaction-view").then(
+        (module) => ({
+          default: module.TransactionView,
+        })
+      )
+    ),
+  },
+
+  {
+    path: PATHS.Overview.gateways.root,
+    element: lazy(() =>
+      import("../pages/overview/gateways").then((module) => ({
+        default: module.GatewayList,
+      }))
     ),
   },
 ];
@@ -168,7 +199,7 @@ export const AppRouter = observer(function AppRouter() {
   return (
     <Routes>
       <Route path={PATHS.Root} element={<AuthGuard />}>
-        <Route index element={<Navigate to={PATHS.Overview.root} />} />
+        <Route index element={<Navigate to={PATHS.Overview.app} />} />
         <Route
           element={
             <Suspense fallback={<TopBarProgress />}>

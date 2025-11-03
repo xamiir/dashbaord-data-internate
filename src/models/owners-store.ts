@@ -2,7 +2,7 @@ import { types, Instance, SnapshotOut } from "mobx-state-tree";
 import { withSetPropAction } from "./helpers/with-set-prop";
 import { withStatus } from "../utils/with-status";
 import { api, GenericResponse } from "@/services/api";
-import { IOwner, IOwnerDTO, IMotorcycle } from "@/types/owner";
+import { IOwner, IOwnerDTO } from "@/types/owner";
 
 export const OwnersStoreModel = types
   .model("OwnersStore")

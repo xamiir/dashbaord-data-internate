@@ -10,7 +10,17 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowUpRight, Database, Users, Activity, Zap } from "lucide-react";
+import {
+  ArrowUpRight,
+  Database,
+  Users,
+  Activity,
+  Zap,
+  Router,
+} from "lucide-react";
+import { useStores } from "@/models/helpers";
+import { observer } from "mobx-react-lite";
+import { useEffect } from "react";
 
 const systemHealth = [
   { name: "Database", status: "healthy", uptime: "99.9%", icon: Database },
@@ -19,7 +29,14 @@ const systemHealth = [
   { name: "Functions", status: "degraded", uptime: "97.2%", icon: Zap },
 ];
 
-export default function Dashboard() {
+export default observer(function Dashboard() {
+  const { gatewaysStore } = useStores();
+
+  useEffect(() => {
+    gatewaysStore.getGateways();
+  }, [gatewaysStore]);
+
+  const gateways = gatewaysStore.gateways;
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -87,6 +104,30 @@ export default function Dashboard() {
                   </Badge>
                 </div>
               ))}
+
+              {/* Gateway Status */}
+              <div className="border-t pt-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-secondary">
+                      <Router className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium">Gateways</p>
+                      <p className="text-xs text-muted-foreground">
+                        Active: {gateways?.active || 0} / Total:{" "}
+                        {gateways?.total || 0}
+                      </p>
+                    </div>
+                  </div>
+                  <Badge
+                    variant="outline"
+                    className="bg-blue-500/10 text-blue-500 border-blue-500/20"
+                  >
+                    {gateways?.active || 0} online
+                  </Badge>
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -95,4 +136,4 @@ export default function Dashboard() {
       <RecentActivity />
     </div>
   );
-}
+});

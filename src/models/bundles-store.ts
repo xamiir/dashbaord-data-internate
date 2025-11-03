@@ -2,20 +2,21 @@ import { types, Instance, SnapshotOut } from "mobx-state-tree";
 import { withSetPropAction } from "./helpers/with-set-prop";
 import { withStatus } from "../utils/with-status";
 import { api, GenericResponse } from "@/services/api";
-import { Transaction, TransactionDTO } from "@/types/transaction";
-export const TransactionStoreModel = types
-  .model("TransactionStore")
+import { Bundle, BundleDTO } from "@/types/bundle";
+
+export const BundlesStoreModel = types
+  .model("BundlesStore")
   .props({
-    transactions: types.optional(
-      types.frozen<GenericResponse<Transaction[]>>(),
-      {} as GenericResponse<Transaction[]>
+    bundles: types.optional(
+      types.frozen<GenericResponse<Bundle[]>>(),
+      {} as GenericResponse<Bundle[]>
     ),
   })
   .actions(withSetPropAction)
   .extend(withStatus)
   .views((_store) => ({}))
   .actions((store) => ({
-    getTransactions: async ({
+    getBundles: async ({
       page,
       limit,
       cachable = true,
@@ -28,11 +29,11 @@ export const TransactionStoreModel = types
     }) => {
       try {
         store.setStatus("pending");
-        const response = await api.get<GenericResponse<Transaction[]>>(
+        const response = await api.get<GenericResponse<Bundle[]>>(
           "",
-          `/transactions/?page=${page}&limit=${limit}&search=${search}`
+          `/bundles/?page=${page}&limit=${limit}&search=${search}`
         );
-        if (cachable) store.setProp("transactions", response);
+        if (cachable) store.setProp("bundles", response);
         store.setStatus("done");
         return response;
       } catch (error) {
@@ -40,13 +41,24 @@ export const TransactionStoreModel = types
         throw error;
       }
     },
+    searchBundles: async (search: string) => {
+      try {
+        const response = await api.get<GenericResponse<Bundle[]>>(
+          "",
+          `/bundles/?search=${search}`
+        );
+        return response;
+      } catch (error) {
+        throw error;
+      }
+    },
 
-    createTransaction: async (data: TransactionDTO) => {
+    createBundle: async (data: BundleDTO) => {
       try {
         store.setStatus("pending");
-        const response = await api.post<GenericResponse<Transaction>>(
+        const response = await api.post<GenericResponse<Bundle>>(
           "",
-          `/v1/api/transactions/`,
+          `/bundles/bundle-create/`,
           data
         );
         store.setStatus("done");
@@ -57,12 +69,12 @@ export const TransactionStoreModel = types
       }
     },
 
-    updateTransaction: async (id: string, data: TransactionDTO) => {
+    updateBundle: async (id: string, data: BundleDTO) => {
       try {
         store.setStatus("pending");
-        const response = await api.put<GenericResponse<Transaction>>(
+        const response = await api.put<GenericResponse<Bundle>>(
           "",
-          `/v1/api/transactions/${id}`,
+          `/bundles/bundle-update/${id}`,
           data
         );
         store.setStatus("done");
@@ -74,7 +86,5 @@ export const TransactionStoreModel = types
     },
   }));
 
-export type TransactionStore = Instance<typeof TransactionStoreModel>;
-export type TransactionStoreSnapshot = SnapshotOut<
-  typeof TransactionStoreModel
->;
+export type BundlesStoreModel = Instance<typeof BundlesStoreModel>;
+export type SnapshotBundlesStoreModel = SnapshotOut<typeof BundlesStoreModel>;

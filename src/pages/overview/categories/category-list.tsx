@@ -1,25 +1,25 @@
+import { categoryColumns } from "@/components/columns/category-columns";
 import { CardDescription, CardTitle } from "@/components/ui/card";
 import { Breadcrumb, DataTable } from "@/components/widgets";
 import { PATHS } from "@/routers/paths";
-import { LayoutDashboard, User2Icon, PlusIcon } from "lucide-react";
+import { LayoutDashboard, Tag, PlusIcon } from "lucide-react";
 import { useEffect } from "react";
 import useIsMountedRef from "@/hooks/use-is-mounted";
 import { useStores } from "@/models/helpers";
 import { Config } from "@/config";
 import { observer } from "mobx-react-lite";
 import { CreateButton } from "@/components/authorized-buttons";
-import { ownerColumns } from "@/components/columns/owner-columns";
 
-export const OwnerList = observer(function OwnerList() {
+export const CategoryList = observer(function CategoryList() {
   const {
-    ownersStore: { getOwners, owners },
+    categoriesStore: { getCategories, categories },
   } = useStores();
 
   const isMounted = useIsMountedRef();
 
   useEffect(() => {
     if (isMounted.current) {
-      getOwners({
+      getCategories({
         page: Config.DEFAULT_PAGE,
         limit: Config.DEFAULT_PAGE_LIMIT,
       });
@@ -36,9 +36,9 @@ export const OwnerList = observer(function OwnerList() {
             icon: <LayoutDashboard className="h-4 w-4" />,
           },
           {
-            label: "Owners",
+            label: "Categories",
             disabled: true,
-            icon: <User2Icon className="h-4 w-4" />,
+            icon: <Tag className="h-4 w-4" />,
           },
         ]}
       />
@@ -46,26 +46,28 @@ export const OwnerList = observer(function OwnerList() {
       <div className="my-8">
         <div className="flex justify-between">
           <div>
-            <CardTitle>Owners</CardTitle>
-            <CardDescription>Manage owners in your application</CardDescription>
+            <CardTitle>Categories</CardTitle>
+            <CardDescription>
+              Manage categories in your application
+            </CardDescription>
           </div>
           <div>
             <CreateButton
-              to={PATHS.Overview.owners.new}
+              to={PATHS.Overview.categories.new}
               className="flex items-center space-x-2"
             >
               <PlusIcon className="h-4 w-4" />
-              <span>Add New Owner</span>
+              <span>Add New Category</span>
             </CreateButton>
           </div>
         </div>
         <div className="mt-4">
           <DataTable
-            data={owners.data || []}
-            columns={ownerColumns}
+            data={categories.data || []}
+            columns={categoryColumns}
             onPageChange={() => {}}
-            currentPage={1}
-            totalPages={1}
+            currentPage={categories.current_page}
+            totalPages={categories.total_pages}
           />
         </div>
       </div>

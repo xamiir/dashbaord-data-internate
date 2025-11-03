@@ -1,24 +1,12 @@
-export type Provider = {
-  id: string;
+export interface IProvider {
+  _id: string;
   name: string;
-  node: string;
-  photoURL: string;
-  accountId: string;
-  isPayin: boolean;
-  isPayout: boolean;
-  isAvailable: boolean;
-  createdAt: string;
-  updatedAt: string;
-  deletedAt: string;
-  DeletedAt: string;
-};
+  image?: string;
+}
+
+export type Provider = IProvider;
 
 export type ProviderDTO = {
   name: string;
-  node: string;
-  photoURL: string;
-  accountId: string;
-  isPayin: boolean;
-  isPayout: boolean;
-  isAvailable: boolean;
+  image?: string;
 };

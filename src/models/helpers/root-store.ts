@@ -4,8 +4,12 @@ import { UsersStoreModel } from "../users-store";
 import { CountryStoreModel } from "../country-store";
 import { OwnersStoreModel } from "../owners-store";
 import { DriversStoreModel } from "../drivers-store";
-import { MotorcyclesStoreModel } from "../motorcycles-store";
 import { CommonStoreModel } from "../common-store";
+import { ProvidersStoreModel } from "../providers-store";
+import { CategoriesStoreModel } from "../categories-store";
+import { BundlesStoreModel } from "../bundles-store";
+import { TransactionStoreModel } from "../transaction-store";
+import { GatewaysStoreModel } from "../gateways-store";
 
 /**
  * The root store, any properties defined here will be accessible
@@ -17,8 +21,12 @@ export const RootStoreModel = types.model("Root").props({
   countryStore: types.optional(CountryStoreModel, {}),
   ownersStore: types.optional(OwnersStoreModel, {}),
   driversStore: types.optional(DriversStoreModel, {}),
-  motorcyclesStore: types.optional(MotorcyclesStoreModel, {}),
   commonStore: types.optional(CommonStoreModel, {}),
+  providersStore: types.optional(ProvidersStoreModel, {}),
+  categoriesStore: types.optional(CategoriesStoreModel, {}),
+  bundlesStore: types.optional(BundlesStoreModel, {}),
+  transactionStore: types.optional(TransactionStoreModel, {}),
+  gatewaysStore: types.optional(GatewaysStoreModel, {}),
 });
 
 export type RootStore = Instance<typeof RootStoreModel>;

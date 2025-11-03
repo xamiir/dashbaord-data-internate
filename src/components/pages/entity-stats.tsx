@@ -1,4 +1,4 @@
-import { UsersIcon, UserCheckIcon, BikeIcon, UserIcon } from "lucide-react";
+import { UsersIcon, UserCheckIcon, UserIcon } from "lucide-react";
 import { StatsCard } from "../widgets";
 import { useEffect } from "react";
 import { useStores } from "@/models/helpers";
@@ -9,14 +9,12 @@ export const EntityStats = observer(function EntityStats() {
   const {
     usersStore: { getUsers, users },
     driversStore: { getDrivers, drivers },
-    motorcyclesStore: { getMotorcycles, motorcycles },
     ownersStore: { getOwners, owners },
   } = useStores();
 
   useEffect(() => {
     getUsers({ page: 1, limit: 1000 });
     getDrivers({ page: 1, limit: 1000 });
-    getMotorcycles({ page: 1, limit: 1000 });
     getOwners({ page: 1, limit: 1000 });
   }, []);
 
@@ -35,14 +33,6 @@ export const EntityStats = observer(function EntityStats() {
           title="Total Drivers"
           value={drivers.data?.length || 0}
           icon={<UserCheckIcon className="h-6 w-6 text-green-500" />}
-        />
-      </div>
-
-      <div className="transform transition-transform hover:scale-105">
-        <StatsCard
-          title="Total Motorcycles"
-          value={motorcycles.data?.length || 0}
-          icon={<BikeIcon className="h-6 w-6 text-red-500" />}
         />
       </div>
 

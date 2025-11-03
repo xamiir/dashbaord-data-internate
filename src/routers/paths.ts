@@ -22,22 +22,32 @@ export const PATHS = {
       edit: (id: string) => `${DASHBOARD_ROOT}/users/${id}/edit`,
       view: (id: string) => `${DASHBOARD_ROOT}/users/${id}`,
     },
-    owners: {
-      root: path(DASHBOARD_ROOT, "owners"),
-      new: path(DASHBOARD_ROOT, "owners/new"),
-      edit: (id: number) => `${DASHBOARD_ROOT}/owners/${id}/edit`,
-      view: (id: number) => `${DASHBOARD_ROOT}/owners/${id}`,
+    providers: {
+      root: path(DASHBOARD_ROOT, "providers"),
+      new: path(DASHBOARD_ROOT, "providers/new"),
+      edit: (id: string) => `${DASHBOARD_ROOT}/providers/${id}/edit`,
+      view: (id: string) => `${DASHBOARD_ROOT}/providers/${id}`,
     },
-    drivers: {
-      root: path(DASHBOARD_ROOT, "drivers"),
-      new: path(DASHBOARD_ROOT, "drivers/new"),
-      edit: (id: number) => `${DASHBOARD_ROOT}/drivers/${id}/edit`,
-      view: (id: number) => `${DASHBOARD_ROOT}/drivers/${id}`,
+    categories: {
+      root: path(DASHBOARD_ROOT, "categories"),
+      new: path(DASHBOARD_ROOT, "categories/new"),
+      edit: (id: string) => `${DASHBOARD_ROOT}/categories/${id}/edit`,
+      view: (id: string) => `${DASHBOARD_ROOT}/categories/${id}`,
     },
-    motorcycles: {
-      root: path(DASHBOARD_ROOT, "motorcycles"),
-      edit: (id: number) => `${DASHBOARD_ROOT}/motorcycles/${id}/edit`,
-      view: (id: number) => `${DASHBOARD_ROOT}/motorcycles/${id}`,
+    bundles: {
+      root: path(DASHBOARD_ROOT, "bundles"),
+      new: path(DASHBOARD_ROOT, "bundles/new"),
+      edit: (id: string) => `${DASHBOARD_ROOT}/bundles/${id}/edit`,
+      view: (id: string) => `${DASHBOARD_ROOT}/bundles/${id}`,
+    },
+    transactions: {
+      root: path(DASHBOARD_ROOT, "transactions"),
+      new: path(DASHBOARD_ROOT, "transactions/new"),
+      edit: (id: string) => `${DASHBOARD_ROOT}/transactions/${id}/edit`,
+      view: (id: string) => `${DASHBOARD_ROOT}/transactions/${id}`,
+    },
+    gateways: {
+      root: path(DASHBOARD_ROOT, "gateways"),
     },
   },
   Auth: {

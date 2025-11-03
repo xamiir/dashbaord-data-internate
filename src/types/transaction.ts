@@ -1,33 +1,42 @@
-export type Transaction = {
+export interface ITransaction {
   id: string;
-  payinProvider: string;
-  payoutProvider: string;
-  payoutAccountId: string;
-  payinAccountId: string;
-  createdBy: string | null;
-  userId: string | null;
-  chargeId: string | null;
-  referenceId: string | null;
-  description: string | null;
-  payinAmount: string;
-  payoutAmount: string;
-  payinStatus: string;
-  rate: number;
-  createdAt: string;
-  updatedAt: string;
-  deleted_at: string | null;
-};
+  reference?: string;
+  user: string; // ObjectId as string
+  senderMobile?: string;
+  receiverMobile: string;
+  network: string;
+  category?: string;
+  amount: number;
+  bundleLabel?: string;
+  ussd?: string;
+  txId: string;
+  gatewayId?: string;
+  simSlot?: number;
+  subscriptionId?: number;
+  gatewayResponse?: any;
+  status: "pending" | "success" | "failed";
+  notified: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export type Transaction = ITransaction;
 
 export type TransactionDTO = {
-  payinProvider: string;
-  payoutProvider: string;
-  description: string | null;
-  chargeId: string | null;
-  referenceId: string | null;
-  payoutAccountId: string;
-  payinAccountId: string;
-  payinAmount: string;
-  payoutAmount: string;
-  payinStatus: string;
-  rate: number;
+  reference?: string;
+  user: string;
+  senderMobile?: string;
+  receiverMobile: string;
+  network: string;
+  category?: string;
+  amount: number;
+  bundleLabel?: string;
+  ussd?: string;
+  txId: string;
+  gatewayId?: string;
+  simSlot?: number;
+  subscriptionId?: number;
+  gatewayResponse?: any;
+  status?: "pending" | "success" | "failed";
+  notified?: boolean;
 };

@@ -1,25 +1,25 @@
+import { transactionColumns } from "@/components/columns/transaction-columns";
 import { CardDescription, CardTitle } from "@/components/ui/card";
 import { Breadcrumb, DataTable } from "@/components/widgets";
 import { PATHS } from "@/routers/paths";
-import { LayoutDashboard, User2Icon, PlusIcon } from "lucide-react";
+import { LayoutDashboard, Receipt, PlusIcon } from "lucide-react";
 import { useEffect } from "react";
 import useIsMountedRef from "@/hooks/use-is-mounted";
 import { useStores } from "@/models/helpers";
 import { Config } from "@/config";
 import { observer } from "mobx-react-lite";
 import { CreateButton } from "@/components/authorized-buttons";
-import { driverColumns } from "@/components/columns/driver-columns";
 
-export const DriverList = observer(function DriverList() {
+export const TransactionList = observer(function TransactionList() {
   const {
-    driversStore: { getDrivers, drivers },
+    transactionStore: { getTransactions, transactions },
   } = useStores();
 
   const isMounted = useIsMountedRef();
 
   useEffect(() => {
     if (isMounted.current) {
-      getDrivers({
+      getTransactions({
         page: Config.DEFAULT_PAGE,
         limit: Config.DEFAULT_PAGE_LIMIT,
       });
@@ -36,9 +36,9 @@ export const DriverList = observer(function DriverList() {
             icon: <LayoutDashboard className="h-4 w-4" />,
           },
           {
-            label: "Drivers",
+            label: "Transactions",
             disabled: true,
-            icon: <User2Icon className="h-4 w-4" />,
+            icon: <Receipt className="h-4 w-4" />,
           },
         ]}
       />
@@ -46,28 +46,28 @@ export const DriverList = observer(function DriverList() {
       <div className="my-8">
         <div className="flex justify-between">
           <div>
-            <CardTitle>Drivers</CardTitle>
+            <CardTitle>Transactions</CardTitle>
             <CardDescription>
-              Manage drivers in your application
+              Manage transactions in your application
             </CardDescription>
           </div>
           <div>
             <CreateButton
-              to={PATHS.Overview.drivers.new}
+              to={PATHS.Overview.transactions.new}
               className="flex items-center space-x-2"
             >
               <PlusIcon className="h-4 w-4" />
-              <span>Add New Driver</span>
+              <span>Add New Transaction</span>
             </CreateButton>
           </div>
         </div>
         <div className="mt-4">
           <DataTable
-            data={drivers.data || []}
-            columns={driverColumns}
+            data={transactions.data || []}
+            columns={transactionColumns}
             onPageChange={() => {}}
-            currentPage={1}
-            totalPages={1}
+            currentPage={transactions.current_page}
+            totalPages={transactions.total_pages}
           />
         </div>
       </div>

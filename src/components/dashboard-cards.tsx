@@ -5,10 +5,12 @@ import { Badge } from "@/components/ui/badge";
 import {
   Users,
   UserCheck,
-  Bike,
   User,
   ArrowUpRight,
   ArrowDownRight,
+  Shield,
+  Tag,
+  Package,
 } from "lucide-react";
 import { useStores } from "@/models/helpers";
 import { observer } from "mobx-react-lite";
@@ -17,16 +19,16 @@ import { useEffect } from "react";
 export const DashboardCards = observer(function DashboardCards() {
   const {
     usersStore: { getUsers, users },
-    driversStore: { getDrivers, drivers },
-    motorcyclesStore: { getMotorcycles, motorcycles },
-    ownersStore: { getOwners, owners },
+    providersStore: { getProviders, providers },
+    categoriesStore: { getCategories, categories },
+    bundlesStore: { getBundles, bundles },
   } = useStores();
 
   useEffect(() => {
     getUsers({ page: 1, limit: 1000 });
-    getDrivers({ page: 1, limit: 1000 });
-    getMotorcycles({ page: 1, limit: 1000 });
-    getOwners({ page: 1, limit: 1000 });
+    getProviders({ page: 1, limit: 1000 });
+    getCategories({ page: 1, limit: 1000 });
+    getBundles({ page: 1, limit: 1000 });
   }, []);
 
   const stats = [
@@ -39,28 +41,28 @@ export const DashboardCards = observer(function DashboardCards() {
       description: "Registered users",
     },
     {
-      title: "Total Drivers",
-      value: drivers.data?.length || 0,
+      title: "Total Providers",
+      value: providers.data?.length || 0,
       change: "+8.2%",
       trend: "up",
-      icon: UserCheck,
-      description: "Active drivers",
+      icon: Shield,
+      description: "Active providers",
     },
     {
-      title: "Total Motorcycles",
-      value: motorcycles.data?.length || 0,
-      change: "+15.3%",
-      trend: "up",
-      icon: Bike,
-      description: "Registered motorcycles",
-    },
-    {
-      title: "Total Owners",
-      value: owners.data?.length || 0,
+      title: "Total Categories",
+      value: categories.data?.length || 0,
       change: "+5.1%",
       trend: "up",
-      icon: User,
-      description: "Vehicle owners",
+      icon: Tag,
+      description: "Available categories",
+    },
+    {
+      title: "Total Bundles",
+      value: bundles.data?.length || 0,
+      change: "+15.3%",
+      trend: "up",
+      icon: Package,
+      description: "Data bundles",
     },
   ];
 

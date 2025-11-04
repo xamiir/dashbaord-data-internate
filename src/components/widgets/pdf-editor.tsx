@@ -19,7 +19,7 @@ const PDFEditor = ({ pdfBlob }: { pdfBlob: Blob }) => {
       canvas.height = viewport.height;
       canvas.width = viewport.width;
 
-      page.render({ canvasContext: context!, viewport });
+      page.render({ canvasContext: context!, viewport, canvas: canvas });
     };
 
     loadPDF();

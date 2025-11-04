@@ -15,9 +15,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
 import { useStores } from "@/models/helpers";
 import toast from "react-hot-toast";
-import { useLocation, useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { Label } from "@/components/ui/label";
 
@@ -38,7 +38,6 @@ export const NewEditTransaction = observer(function NewEditTransaction() {
     bundlesStore: { getBundles, bundles },
   } = useStores();
 
-  const location = useLocation();
   const navigate = useNavigate();
 
   const form = useForm<ZodBuyData>({

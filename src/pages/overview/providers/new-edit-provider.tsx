@@ -17,7 +17,6 @@ import { useStores } from "@/models/helpers";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { observer } from "mobx-react-lite";
-import { useEffect } from "react";
 import { get } from "lodash";
 import { z } from "zod";
 import FileUpload from "@/components/widgets/file-upload";

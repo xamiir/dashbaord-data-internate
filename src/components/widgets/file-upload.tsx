@@ -42,8 +42,7 @@ const FileUpload = (props: FileUploadProps) => {
       files.forEach((file) => {
         const formData = new FormData();
         formData.append("file", file);
-        const fileType = file.type.split("/")[0];
-        uploadFile(formData, fileType)
+        uploadFile(formData)
           .then((res) => {
             props.form.setValue(props.name, res.data);
             res.data.forEach((url: string) => {

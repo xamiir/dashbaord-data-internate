@@ -2,7 +2,6 @@ import { ColumnDef } from "@tanstack/react-table";
 import { Checkbox } from "../ui/checkbox";
 import { Transaction } from "@/types/transaction";
 import { PATHS } from "@/routers/paths";
-import { EditIcon } from "lucide-react";
 import { EditButton } from "../authorized-buttons";
 import { Badge } from "../ui/badge";
 

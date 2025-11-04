@@ -5,7 +5,6 @@ import { AuthGuard, GuestGuard } from "@/app/guards";
 import { Sidebar } from "@/components/widgets";
 import { Suspense, lazy } from "react";
 import TopBarProgress from "react-topbar-progress-indicator";
-import { useStores } from "@/models/helpers";
 import { observer } from "mobx-react-lite";
 import { Login } from "@/pages/auth/login";
 import { VerifyOTP } from "@/pages/auth/verify-otp";

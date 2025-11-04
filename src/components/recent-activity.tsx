@@ -8,49 +8,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-
-const activities = [
-  {
-    user: "John Doe",
-    email: "john@example.com",
-    action: "Created new user account",
-    time: "2 minutes ago",
-    type: "user",
-    avatar: "/user-john.jpg",
-  },
-  {
-    user: "Sarah Wilson",
-    email: "sarah@example.com",
-    action: "Updated database schema",
-    time: "5 minutes ago",
-    type: "database",
-    avatar: "/placeholder-546p9.png",
-  },
-  {
-    user: "Mike Johnson",
-    email: "mike@example.com",
-    action: "Deployed new API version",
-    time: "12 minutes ago",
-    type: "deployment",
-    avatar: "/user-mike.jpg",
-  },
-  {
-    user: "Emma Davis",
-    email: "emma@example.com",
-    action: "Modified user permissions",
-    time: "1 hour ago",
-    type: "security",
-    avatar: "/user-emma.jpg",
-  },
-  {
-    user: "Alex Chen",
-    email: "alex@example.com",
-    action: "Generated analytics report",
-    time: "2 hours ago",
-    type: "analytics",
-    avatar: "/user-alex.jpg",
-  },
-];
+import { useStores } from "@/models/helpers";
+import { observer } from "mobx-react-lite";
+import { useEffect } from "react";
 
 const getTypeBadge = (type: string) => {
   const variants = {
@@ -59,12 +19,40 @@ const getTypeBadge = (type: string) => {
     deployment: "bg-purple-500/10 text-purple-500 border-purple-500/20",
     security: "bg-red-500/10 text-red-500 border-red-500/20",
     analytics: "bg-yellow-500/10 text-yellow-500 border-yellow-500/20",
+    success: "bg-green-500/10 text-green-500 border-green-500/20",
+    failed: "bg-red-500/10 text-red-500 border-red-500/20",
+    pending: "bg-yellow-500/10 text-yellow-500 border-yellow-500/20",
   };
 
   return variants[type as keyof typeof variants] || variants.user;
 };
 
-export function RecentActivity() {
+export const RecentActivity = observer(function RecentActivity() {
+  const {
+    transactionStore: { getTransactions, transactions },
+  } = useStores();
+
+  useEffect(() => {
+    getTransactions({ page: 1, limit: 10 });
+  }, [getTransactions]);
+
+  const activities =
+    transactions.data?.slice(0, 5).map((transaction: any) => ({
+      user: transaction.senderMobile || "Unknown",
+      email: transaction.receiverMobile || "",
+      action: `Transaction ${transaction.reference} - ${transaction.status}`,
+      time: transaction.createdAt
+        ? new Date(transaction.createdAt).toLocaleString()
+        : "Unknown",
+      type:
+        transaction.status === "success"
+          ? "success"
+          : transaction.status === "failed"
+          ? "failed"
+          : "pending",
+      avatar: "",
+    })) || [];
+
   return (
     <Card>
       <CardHeader>
@@ -80,7 +68,7 @@ export function RecentActivity() {
               <div className="h-9 w-9 rounded-full bg-gray-200 flex items-center justify-center text-sm font-medium">
                 {activity.user
                   .split(" ")
-                  .map((n) => n[0])
+                  .map((n: string) => n[0])
                   .join("")}
               </div>
               <div className="flex-1 space-y-1">
@@ -108,4 +96,4 @@ export function RecentActivity() {
       </CardContent>
     </Card>
   );
-}
+});

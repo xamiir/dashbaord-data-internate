@@ -47,7 +47,7 @@ export interface FormInputProp {
 }
 
 export interface FormProps {
-  form: UseFormReturn<any, any, undefined>;
+  form: UseFormReturn<any, any, any>;
   name: string;
   secondname?: any;
   label: string;

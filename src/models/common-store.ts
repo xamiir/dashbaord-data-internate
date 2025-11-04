@@ -15,7 +15,7 @@ export const CommonStoreModel = types
   .extend(withStatus)
   // .views((store) => ({}))
   .actions((store) => ({
-    uploadFile: async (data: FormData, type: string) => {
+    uploadFile: async (data: FormData) => {
       try {
         store.setStatus("pending");
         const response = await api.post<GenericResponse<string[]>>(

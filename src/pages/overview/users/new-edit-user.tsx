@@ -18,9 +18,7 @@ import { useStores } from "@/models/helpers";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { observer } from "mobx-react-lite";
-import { useEffect, useState } from "react";
 import { get } from "lodash";
-import { Country } from "@/types/country";
 
 export const NewEditUser = observer(function NewEditUser() {
   const {
@@ -33,7 +31,7 @@ export const NewEditUser = observer(function NewEditUser() {
   const navigate = useNavigate();
   const id = get(params, "id", "");
 
-  const currentUser = users.data?.find((user) => user.id == Number(id));
+  const currentUser = users.data?.find((user) => user.id === id);
 
   const form = useForm<ZodUser>({
     resolver: zodResolver(userSchema),
@@ -48,13 +46,17 @@ export const NewEditUser = observer(function NewEditUser() {
   const handleSubmit = async (values: ZodUser) => {
     try {
       if (isEdit) {
-        await updateUser(id, values);
+        await updateUser(id, {
+          ...values,
+          password: currentUser?.password || "",
+          apiKey: currentUser?.apiKey || "",
+        });
         toast.success("User updated successfully");
         navigate(PATHS.Overview.users.root);
         return;
       }
 
-      await createUser(values);
+      await createUser({ ...values, password: "", apiKey: "" });
       await getUsers({ page: 1, limit: 10 });
       toast.success("User created successfully");
       navigate(PATHS.Overview.users.root);

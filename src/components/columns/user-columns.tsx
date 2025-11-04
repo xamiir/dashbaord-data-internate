@@ -4,7 +4,6 @@ import { IUser } from "@/types/user";
 import { PATHS } from "@/routers/paths";
 import { EditIcon } from "lucide-react";
 import { EditButton } from "../authorized-buttons";
-import { Badge } from "../ui/badge";
 
 export const userColumns: ColumnDef<IUser>[] = [
   {

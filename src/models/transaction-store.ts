@@ -2,7 +2,7 @@ import { types, Instance, SnapshotOut } from "mobx-state-tree";
 import { withSetPropAction } from "./helpers/with-set-prop";
 import { withStatus } from "../utils/with-status";
 import { api, GenericResponse } from "@/services/api";
-import { Transaction, TransactionDTO } from "@/types/transaction";
+import { Transaction, TransactionDTO, BuyDataDTO } from "@/types/transaction";
 export const TransactionStoreModel = types
   .model("TransactionStore")
   .props({
@@ -63,6 +63,22 @@ export const TransactionStoreModel = types
         const response = await api.put<GenericResponse<Transaction>>(
           "",
           `/v1/api/transactions/${id}`,
+          data
+        );
+        store.setStatus("done");
+        return response;
+      } catch (error) {
+        store.setStatus("error");
+        throw error;
+      }
+    },
+
+    buyData: async (data: BuyDataDTO) => {
+      try {
+        store.setStatus("pending");
+        const response = await api.post<GenericResponse<Transaction>>(
+          "",
+          `/v1/api/buy-data`,
           data
         );
         store.setStatus("done");

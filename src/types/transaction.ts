@@ -40,3 +40,12 @@ export type TransactionDTO = {
   status?: "pending" | "success" | "failed";
   notified?: boolean;
 };
+
+export type BuyDataDTO = {
+  senderMobile: string;
+  receiverMobile: string;
+  reference: string;
+  selectBundle: {
+    _id: string;
+  };
+};

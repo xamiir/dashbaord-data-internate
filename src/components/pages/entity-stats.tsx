@@ -3,7 +3,6 @@ import { StatsCard } from "../widgets";
 import { useEffect } from "react";
 import { useStores } from "@/models/helpers";
 import { observer } from "mobx-react-lite";
-import { Config } from "@/config";
 
 export const EntityStats = observer(function EntityStats() {
   const {

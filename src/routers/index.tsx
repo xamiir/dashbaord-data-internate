@@ -170,6 +170,16 @@ const routesConfig: RouteType[] = [
     ),
   },
   {
+    path: PATHS.Overview.transactions.new,
+    element: lazy(() =>
+      import("../pages/overview/transactions/new-edit-transaction").then(
+        (module) => ({
+          default: module.NewEditTransaction,
+        })
+      )
+    ),
+  },
+  {
     path: PATHS.Overview.transactions.root + "/:id",
     element: lazy(() =>
       import("../pages/overview/transactions/transaction-view").then(

@@ -12,10 +12,6 @@ import {
   Users2,
   MenuIcon,
   Shield,
-  MapIcon,
-  Bike,
-  UserCheck,
-  CreditCard,
   ChevronLeft,
   ChevronRight,
   Package,
@@ -26,8 +22,7 @@ import {
 import { PATHS } from "@/routers/paths";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "../ui/toggle-mode";
-import React, { useState } from "react";
-import { Settings } from "lucide-react";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 import Assets from "@/assets";
 import {
@@ -40,7 +35,6 @@ import {
 } from "../ui/dropdown-menu";
 import { useStores } from "@/models/helpers";
 import { observer } from "mobx-react-lite";
-import { useTheme } from "next-themes";
 
 const mapIcons = (icon: string) => {
   switch (icon) {

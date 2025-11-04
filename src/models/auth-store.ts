@@ -5,7 +5,6 @@ import { api, GenericResponse } from "@/services/api";
 import { IUser } from "@/types/user";
 import { saveString } from "@/app/utils/storage";
 import { PATHS } from "@/routers/paths";
-import toast from "react-hot-toast";
 
 export const AuthenticationStoreModel = types
   .model("AuthenticationStore")

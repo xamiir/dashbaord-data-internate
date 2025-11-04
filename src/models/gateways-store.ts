@@ -1,7 +1,7 @@
 import { types, Instance, SnapshotOut } from "mobx-state-tree";
 import { withSetPropAction } from "./helpers/with-set-prop";
 import { withStatus } from "../utils/with-status";
-import { api, GenericResponse } from "@/services/api";
+import { api } from "@/services/api";
 import { GatewayResponse } from "@/types/gateway";
 
 export const GatewaysStoreModel = types

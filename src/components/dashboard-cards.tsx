@@ -11,6 +11,7 @@ import {
   Shield,
   Tag,
   Package,
+  Receipt,
 } from "lucide-react";
 import { useStores } from "@/models/helpers";
 import { observer } from "mobx-react-lite";
@@ -22,6 +23,7 @@ export const DashboardCards = observer(function DashboardCards() {
     providersStore: { getProviders, providers },
     categoriesStore: { getCategories, categories },
     bundlesStore: { getBundles, bundles },
+    transactionStore: { getTransactions, transactions },
   } = useStores();
 
   useEffect(() => {
@@ -29,6 +31,7 @@ export const DashboardCards = observer(function DashboardCards() {
     getProviders({ page: 1, limit: 1000 });
     getCategories({ page: 1, limit: 1000 });
     getBundles({ page: 1, limit: 1000 });
+    getTransactions({ page: 1, limit: 1000 });
   }, []);
 
   const stats = [
@@ -64,10 +67,18 @@ export const DashboardCards = observer(function DashboardCards() {
       icon: Package,
       description: "Data bundles",
     },
+    {
+      title: "Total Transactions",
+      value: transactions.data?.length || 0,
+      change: "+20.1%",
+      trend: "up",
+      icon: Receipt,
+      description: "Completed transactions",
+    },
   ];
 
   return (
-    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5">
       {stats.map((stat) => (
         <Card key={stat.title} className="relative overflow-hidden">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">

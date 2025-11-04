@@ -1,11 +1,8 @@
 import {
   ArrowLeft,
-  MapPin,
   Phone,
-  Calendar,
   User,
   FileText,
-  Building,
   Mail,
   Shield,
   CheckCircle,
@@ -25,7 +22,7 @@ export const UserView = observer(function UserView() {
     usersStore: { users },
   } = useStores();
 
-  const user = users.data?.find((user) => user.id == Number(id));
+  const user = users.data?.find((user) => user.id === id);
 
   if (!user) {
     return (
@@ -144,7 +141,9 @@ export const UserView = observer(function UserView() {
                       Created At
                     </h3>
                     <p className="mt-1 text-base font-medium">
-                      {new Date(user.created_at).toLocaleDateString()}
+                      {user.created_at
+                        ? new Date(user.created_at).toLocaleDateString()
+                        : "N/A"}
                     </p>
                   </div>
                   <div>
@@ -152,7 +151,9 @@ export const UserView = observer(function UserView() {
                       Updated At
                     </h3>
                     <p className="mt-1 text-base font-medium">
-                      {new Date(user.updated_at).toLocaleDateString()}
+                      {user.updated_at
+                        ? new Date(user.updated_at).toLocaleDateString()
+                        : "N/A"}
                     </p>
                   </div>
                 </div>
@@ -292,7 +293,9 @@ export const UserView = observer(function UserView() {
                       Account Created
                     </h3>
                     <p className="mt-1 text-base font-medium">
-                      {new Date(user.created_at).toLocaleString()}
+                      {user.created_at
+                        ? new Date(user.created_at).toLocaleString()
+                        : "N/A"}
                     </p>
                   </div>
                   <div>
@@ -300,7 +303,9 @@ export const UserView = observer(function UserView() {
                       Last Updated
                     </h3>
                     <p className="mt-1 text-base font-medium">
-                      {new Date(user.updated_at).toLocaleString()}
+                      {user.updated_at
+                        ? new Date(user.updated_at).toLocaleString()
+                        : "N/A"}
                     </p>
                   </div>
                 </div>
@@ -319,7 +324,9 @@ export const UserView = observer(function UserView() {
                           Account Created
                         </p>
                         <p className="text-sm text-gray-500 dark:text-gray-400">
-                          {new Date(user.created_at).toLocaleString()}
+                          {user.created_at
+                            ? new Date(user.created_at).toLocaleString()
+                            : "N/A"}
                         </p>
                       </div>
                     </div>
@@ -332,7 +339,9 @@ export const UserView = observer(function UserView() {
                           Last Updated
                         </p>
                         <p className="text-sm text-gray-500 dark:text-gray-400">
-                          {new Date(user.updated_at).toLocaleString()}
+                          {user.updated_at
+                            ? new Date(user.updated_at).toLocaleString()
+                            : "N/A"}
                         </p>
                       </div>
                     </div>

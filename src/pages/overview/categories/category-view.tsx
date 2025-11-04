@@ -14,7 +14,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useStores } from "@/models/helpers";
 import { observer } from "mobx-react-lite";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 
 export const CategoryView = observer(function CategoryView() {
   const { id } = useParams<{ id: string }>();

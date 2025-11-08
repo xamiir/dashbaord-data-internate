@@ -197,6 +197,23 @@ const routesConfig: RouteType[] = [
       }))
     ),
   },
+
+  {
+    path: PATHS.Overview.sms.root,
+    element: lazy(() =>
+      import("../pages/overview/sms/sms-list").then((module) => ({
+        default: module.SmsList,
+      }))
+    ),
+  },
+  {
+    path: PATHS.Overview.sms.root + "/:id",
+    element: lazy(() =>
+      import("../pages/overview/sms/sms-view").then((module) => ({
+        default: module.SmsView,
+      }))
+    ),
+  },
 ];
 
 export const AppRouter = observer(function AppRouter() {

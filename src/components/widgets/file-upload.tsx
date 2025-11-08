@@ -28,7 +28,9 @@ const FileUpload = (props: FileUploadProps) => {
 
   const [files, setFiles] = useState<File[] | null>(null);
   const [uploadedFiles, setUploadedFiles] = useState<string[]>(
-    props.form.getValues(props.name) ?? []
+    Array.isArray(props.form.getValues(props.name))
+      ? props.form.getValues(props.name)
+      : []
   );
 
   const dropZoneConfig = {
@@ -91,7 +93,7 @@ const FileUpload = (props: FileUploadProps) => {
         </FileUploaderContent>
       </FileUploader>
 
-      {uploadedFiles.length > 0 && (
+      {uploadedFiles && uploadedFiles.length > 0 && (
         <div className="ml-2 flex gap-2">
           {uploadedFiles.map((url, i) => {
             return url.includes("pdf") ? (

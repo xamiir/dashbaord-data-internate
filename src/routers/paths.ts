@@ -49,6 +49,10 @@ export const PATHS = {
     gateways: {
       root: path(DASHBOARD_ROOT, "gateways"),
     },
+    sms: {
+      root: path(DASHBOARD_ROOT, "sms"),
+      view: (id: string) => `${DASHBOARD_ROOT}/sms/${id}`,
+    },
   },
   Auth: {
     root: AUTH_ROOT,

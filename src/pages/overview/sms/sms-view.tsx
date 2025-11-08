@@ -12,7 +12,6 @@ import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
-import useIsMountedRef from "@/hooks/use-is-mounted";
 import { useStores } from "@/models/helpers";
 
 export const SmsView = observer(function SmsView() {

@@ -18,6 +18,7 @@ import {
   Tag,
   Receipt,
   Router,
+  MessageSquare,
 } from "lucide-react";
 import { PATHS } from "@/routers/paths";
 import { Button } from "@/components/ui/button";
@@ -52,6 +53,8 @@ const mapIcons = (icon: string) => {
       return <Receipt className="mr-3 h-5 w-5" />;
     case "gateways":
       return <Router className="mr-3 h-5 w-5" />;
+    case "sms":
+      return <MessageSquare className="mr-3 h-5 w-5" />;
     default:
       return <LayoutDashboardIcon className="mr-3 h-5 w-5" />;
   }
@@ -101,6 +104,11 @@ export const Sidebar = observer(function Sidebar() {
       path: PATHS.Overview.gateways.root,
       icon: "gateways",
       subject: "Gateways",
+    },
+    {
+      path: PATHS.Overview.sms.root,
+      icon: "sms",
+      subject: "SMS",
     },
   ];
 

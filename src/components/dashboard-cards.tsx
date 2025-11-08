@@ -10,6 +10,7 @@ import {
   Tag,
   Package,
   Receipt,
+  MessageSquare,
 } from "lucide-react";
 import { useStores } from "@/models/helpers";
 import { observer } from "mobx-react-lite";
@@ -73,10 +74,18 @@ export const DashboardCards = observer(function DashboardCards() {
       icon: Receipt,
       description: "Completed transactions",
     },
+    {
+      title: "Total SMS",
+      value: 0, // Will be updated when SMS store is connected
+      change: "+7.8%",
+      trend: "up",
+      icon: MessageSquare,
+      description: "SMS messages",
+    },
   ];
 
   return (
-    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5">
+    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
       {stats.map((stat) => (
         <Card key={stat.title} className="relative overflow-hidden">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">

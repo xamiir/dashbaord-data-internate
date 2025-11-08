@@ -10,6 +10,7 @@ import { CategoriesStoreModel } from "../categories-store";
 import { BundlesStoreModel } from "../bundles-store";
 import { TransactionStoreModel } from "../transaction-store";
 import { GatewaysStoreModel } from "../gateways-store";
+import { SmsStoreModel } from "../sms-store";
 
 /**
  * The root store, any properties defined here will be accessible
@@ -27,6 +28,7 @@ export const RootStoreModel = types.model("Root").props({
   bundlesStore: types.optional(BundlesStoreModel, {}),
   transactionStore: types.optional(TransactionStoreModel, {}),
   gatewaysStore: types.optional(GatewaysStoreModel, {}),
+  smsStore: types.optional(SmsStoreModel, {}),
 });
 
 export type RootStore = Instance<typeof RootStoreModel>;

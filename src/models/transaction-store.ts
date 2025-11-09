@@ -78,7 +78,7 @@ export const TransactionStoreModel = types
         store.setStatus("pending");
         const response = await api.post<GenericResponse<Transaction>>(
           "",
-          `/v1/api/buy-data`,
+          `/buy-data`,
           data
         );
         store.setStatus("done");
